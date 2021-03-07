@@ -1,7 +1,8 @@
 package com.vinibrenobr11.springhibernatedemo.apis;
 
+import java.util.List;
+
 import com.vinibrenobr11.springhibernatedemo.models.Person;
-import com.vinibrenobr11.springhibernatedemo.repository.PersonRepository;
 import com.vinibrenobr11.springhibernatedemo.repository.interfaces.PersonRepositoryInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class PersonApi {
     private PersonRepositoryInterface personRepo;
     
     @GetMapping
-    public Iterable<Person> getAll() {
+    public List<Person> getAll() {
         return personRepo.findAll();
     }
 
