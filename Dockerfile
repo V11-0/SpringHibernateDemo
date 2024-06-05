@@ -1,16 +1,10 @@
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM maven:3.9.7-eclipse-temurin-21-alpine AS build
 WORKDIR /workspace/app
 
-COPY mvnw .
-COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-# Fix for building in Windows
-RUN apk update && apk add dos2unix
-RUN dos2unix mvnw
-
-RUN ./mvnw install -DskipTests
+RUN mvn install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM eclipse-temurin:21-jdk-alpine
